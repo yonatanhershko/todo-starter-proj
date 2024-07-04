@@ -35,12 +35,10 @@ export function logout() {
         })
 }
 
-export function checkout(diff) {
-    return userService.updateScore(-diff)
+export function checkout(diff=10) {
+    return userService.updateScore(+diff)
         .then((newScore) => {
             store.dispatch({ type: SET_USER_SCORE, score: newScore })
-            store.dispatch({ type: CLEAR_CART })
-            store.dispatch({ type: TOGGLE_CART_IS_SHOWN })
         })
         .catch((err) => {
             console.log('user actions -> Cannot logout', err)

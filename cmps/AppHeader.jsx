@@ -14,11 +14,13 @@ export function AppHeader() {
     const navigate = useNavigate()
     const user = useSelector(storeState => storeState.loggedInUser)
     const todos = useSelector(storeState => storeState.todos)
+    const dispatch = useDispatch()
 
     function onLogout() {
         logout()
             .then(() => {
                 // TODO: use dispatch
+                dispatch({ type:SET_USER_SCORE })
                 // showSuccessMsg('Bye Bye')
             })
             .catch((err) => {
@@ -35,10 +37,13 @@ export function AppHeader() {
     function todosProgressBar() {
         if (!todos || todos.length === 0) return '0%'
         
-        const completedTodos = todos.filter(todo => todo.isDone).length
+        const completedTodos = todos.filter((todo) => {todo.isDone
+          
+        }).length
         const progressPercentage = (completedTodos / todos.length) * 100
         return `${progressPercentage}%`
     }
+
 
 
     return (
@@ -55,7 +60,7 @@ export function AppHeader() {
                 {user ? (
                     < section >
                         
-                        <Link to={`/user/${user._id}`}>Hello {user.fullname}</Link>
+                        <Link to={`/user/${user._id}`}>Hello {user.fullname} <span>⭐{user.score.toLocaleString()}</span></Link>
                         <button onClick={onLogout}>Logout</button>
                        
                     </ section >

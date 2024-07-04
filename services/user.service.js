@@ -8,6 +8,7 @@ export const userService = {
     signup,
     getById,
     query,
+    updateScore,
     getEmptyCredentials
 }
 const STORAGE_KEY_LOGGEDIN = 'user'
@@ -30,10 +31,25 @@ function login({ username, password }) {
         })
 }
 
+
+function updateScore(diff) {
+    const loggedInUserId = getLoggedinUser()._id
+    return userService.getById(loggedInUserId)
+        .then(user => {
+            // if (user.score + diff < 0) return Promise.reject('No credit')
+            user.score += diff
+            return storageService.put(STORAGE_KEY, user)
+        })
+        .then(user => {
+            _setLoggedinUser(user)
+            return user.score
+        })
+}
+
 function signup({ username, password, fullname }) {
     const user = { username, password, fullname }
     user.createdAt = user.updatedAt = Date.now()
-    user.balence = 10000
+    user.score = 10000
     user.activitie = [{ txt: 'Added a Todo', at: 1523873242735 }]
 
     return storageService.post(STORAGE_KEY, user)
@@ -50,7 +66,7 @@ function getLoggedinUser() {
 }
 
 function _setLoggedinUser(user) {
-    const userToSave = { _id: user._id, fullname: user.fullname }
+    const userToSave = { _id: user._id, fullname: user.fullname , score:10000}
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN, JSON.stringify(userToSave))
     return userToSave
 }
