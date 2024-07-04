@@ -29,8 +29,14 @@ function query(filterBy = {}) {
                 todos = todos.filter(todo => todo.importance >= filterBy.importance)
             }
 
-            return todos
-        })
+            if (filterBy.isDone) {
+                if (filterBy.isDone === 'false') {
+                    todos = todos.filter(todo => !todo.isDone)
+                } else if (filterBy.isDone === 'true') {
+                    todos = todos.filter(todo => todo.isDone)
+                }}
+                return todos
+            })
 }
 
 function get(todoId) {
@@ -58,7 +64,7 @@ function save(todo) {
 }
 
 function getEmptyTodo(txt = '', importance = 5) {
-    return { txt, importance, isDone: false}
+    return { txt, importance, isDone: false }
 }
 
 function getDefaultFilter() {

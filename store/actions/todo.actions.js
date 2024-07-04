@@ -29,7 +29,7 @@ export function removeTodo(todoId) {
         })
 }
 
-export function saveTODO(todo) {
+export function saveTodo(todo) {
     const type = todo._id ? UPDATE_TODO : ADD_TODO
     return todoService.save(todo)
         .then(savedTodo => {

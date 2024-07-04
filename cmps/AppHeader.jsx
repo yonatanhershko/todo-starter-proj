@@ -13,7 +13,8 @@ import { showErrorMsg } from '../services/event-bus.service.js'
 export function AppHeader() {
     const navigate = useNavigate()
     const user = useSelector(storeState => storeState.loggedInUser)
-    
+    const todos = useSelector(storeState => storeState.todos)
+
     function onLogout() {
         logout()
             .then(() => {
@@ -30,19 +31,37 @@ export function AppHeader() {
     //     setUser(user)
     //     navigate('/')
     // }
+
+    function todosProgressBar() {
+        if (!todos || todos.length === 0) return '0%'
+        
+        const completedTodos = todos.filter(todo => todo.isDone).length
+        const progressPercentage = (completedTodos / todos.length) * 100
+        return `${progressPercentage}%`
+    }
+
+
     return (
         <header className="app-header full main-layout">
             <section className="header-container">
                 <h1>React Todo App</h1>
+                {user && ( <div className='Progress'>
+                    <div 
+                        className='Progress-bar'
+                        style={{ width: todosProgressBar() }}
+                    >
+                    </div>
+                </div>)}
                 {user ? (
                     < section >
-
+                        
                         <Link to={`/user/${user._id}`}>Hello {user.fullname}</Link>
                         <button onClick={onLogout}>Logout</button>
+                       
                     </ section >
                 ) : (
                     <section>
-                        <LoginSignup/>
+                        <LoginSignup />
                     </section>
                 )}
                 <nav className="app-nav">

@@ -27,6 +27,24 @@ a.active {
 }
 
 
+.Progress {
+    display: flex;
+    margin-right: 10px;
+    background-color: antiquewhite;
+    width: 200px;
+    height: 25px;
+    border: 2px solid antiquewhite;
+    border-radius: 5px; 
+}
+
+.Progress-bar {
+    background-color: rgb(20, 117, 78);
+    width: 150px; 
+    height: 100%; 
+    border-radius: 5px; 
+}
+
+
 @media (max-width: 720px) {
     .app-header {
         color: var(--clr2bg-light);
