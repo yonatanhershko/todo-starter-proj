@@ -29,12 +29,14 @@ export function TodoIndex() {
     }, [filterBy])
 
     function onRemoveTodo(todoId) {
-        removeTodo(todoId)
-            .then(() => showSuccessMsg('todo removed'))
-            .catch(err => {
-                console.log('err:', err)
-                showErrorMsg('Cannot remove todo')
-            })
+        if (confirm('Sure you want to delete?')) {
+            removeTodo(todoId)
+                .then(() => showSuccessMsg('Todo removed'))
+                .catch(err => {
+                    console.log('Error:', err);
+                    showErrorMsg('Cannot remove todo');
+                });
+        }
     }
 
     function onToggleTodo(todo) {

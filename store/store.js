@@ -21,9 +21,9 @@ export const SET_IS_LOADING = 'SET_IS_LOADING'
 // export const CLEAR_CART = 'CLEAR_CART'
 
 
-//* User
-// export const SET_USER = 'SET_USER'
-// export const SET_USER_SCORE = 'SET_USER_SCORE'
+// * User
+export const SET_USER = 'SET_USER'
+export const SET_USER_SCORE = 'SET_USER_SCORE'
 
 
 const initialState = {
@@ -69,36 +69,36 @@ function appReducer(state = initialState, cmd = {}) {
                     isLoading: cmd.isLoading
                 }
 
-        //     //* Shopping cart
-        //     case TOGGLE_CART_IS_SHOWN:
-        //         return {
-        //             ...state,
-        //             isCartShown: !state.isCartShown
-        //         }
-        //     case ADD_CAR_TO_CART:
-        //         return {
-        //             ...state,
-        //             shoppingCart: [...state.shoppingCart, cmd.car]
-        //         }
+            // //* Shopping cart
+            // case TOGGLE_CART_IS_SHOWN:
+            //     return {
+            //         ...state,
+            //         isCartShown: !state.isCartShown
+            //     }
+            // case ADD_CAR_TO_CART:
+            //     return {
+            //         ...state,
+            //         shoppingCart: [...state.shoppingCart, cmd.car]
+            //     }
 
-        //     case REMOVE_CAR_FROM_CART:
-        //         const shoppingCart = state.shoppingCart.filter(car => car._id !== cmd.carId)
-        //         return { ...state, shoppingCart }
+            // case REMOVE_CAR_FROM_CART:
+            //     const shoppingCart = state.shoppingCart.filter(car => car._id !== cmd.carId)
+            //     return { ...state, shoppingCart }
 
 
-        //     case CLEAR_CART:
-        //         return { ...state, shoppingCart: [] }
+            // case CLEAR_CART:
+            //     return { ...state, shoppingCart: [] }
 
-        //     //* User
-        //     case SET_USER:
-        //         return {
-        //             ...state,
-        //             loggedInUser: cmd.user
-        //         }
+            //* User
+            case SET_USER:
+                return {
+                    ...state,
+                    loggedInUser: cmd.user
+                }
 
-        //     case SET_USER_SCORE:
-        //         const loggedInUser = { ...state.loggedInUser, score: cmd.score }
-        //         return { ...state, loggedInUser }
+            case SET_USER_SCORE:
+                const loggedInUser = { ...state.loggedInUser, score: cmd.score }
+                return { ...state, loggedInUser }
 
         default:
             return state

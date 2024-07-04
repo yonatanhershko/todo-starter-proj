@@ -33,6 +33,8 @@ function login({ username, password }) {
 function signup({ username, password, fullname }) {
     const user = { username, password, fullname }
     user.createdAt = user.updatedAt = Date.now()
+    user.balence = 10000
+    user.activitie = [{ txt: 'Added a Todo', at: 1523873242735 }]
 
     return storageService.post(STORAGE_KEY, user)
         .then(_setLoggedinUser)
