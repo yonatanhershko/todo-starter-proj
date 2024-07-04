@@ -35,7 +35,7 @@ export function logout() {
         })
 }
 
-export function checkout(diff=10) {
+export function changeUserScore(diff=10) {
     return userService.updateScore(+diff)
         .then((newScore) => {
             store.dispatch({ type: SET_USER_SCORE, score: newScore })
