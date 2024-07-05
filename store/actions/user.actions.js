@@ -35,10 +35,12 @@ export function logout() {
         })
 }
 
-export function changeUserScore(diff=10) {
+export function changeUserScore(diff) {
     return userService.updateScore(+diff)
         .then((newScore) => {
             store.dispatch({ type: SET_USER_SCORE, score: newScore })
+            store.dispatch({ type: SET_USER, user: { ...user, score: newScore } });
+
         })
         .catch((err) => {
             console.log('user actions -> Cannot logout', err)

@@ -29,6 +29,7 @@ export const SET_USER_SCORE = 'SET_USER_SCORE'
 const initialState = {
     count: 101,
     todos: [],
+    score:10000 ,
     isLoading: false,
 }
 
