@@ -9,7 +9,8 @@ export const userService = {
     getById,
     query,
     updateScore,
-    getEmptyCredentials
+    getEmptyCredentials,
+    update
 }
 const STORAGE_KEY_LOGGEDIN = 'user'
 const STORAGE_KEY = 'userDB'
@@ -77,6 +78,16 @@ function getEmptyCredentials() {
         username: 'muki',
         password: 'muki1',
     }
+}
+
+function update(user) {
+    return storageService.put(STORAGE_KEY, user)
+        .then(updatedUser => {
+            if (getLoggedinUser()._id === updatedUser._id) {
+                _setLoggedinUser(updatedUser);
+            }
+            return updatedUser;
+        });
 }
 
 // signup({username: 'muki', password: 'muki1', fullname: 'Muki Ja'})

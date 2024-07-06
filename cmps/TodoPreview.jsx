@@ -1,4 +1,4 @@
-export function TodoPreview({ todo, onToggleTodo }) {
+export function TodoPreview({ todo, onToggleTodo  ,showActions = true}) {
 
 
     return (
