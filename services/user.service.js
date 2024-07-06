@@ -48,7 +48,7 @@ function updateScore(diff) {
 }
 
 function signup({ username, password, fullname }) {
-    const user = { username, password, fullname, score :10000 }
+    const user = { username, password, fullname, score: 10000,  prefs: {color: 'black', bgColor: 'white'} }
     user.createdAt = user.updatedAt = Date.now()
     user.score = 10000
     user.activitie = [{ txt: 'Added a Todo', at: 1523873242735 }]

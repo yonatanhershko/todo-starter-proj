@@ -63,9 +63,11 @@ export function UserDetails() {
 
     if (!user) return <div>Loading...</div>
 
+    const userP = user.prefs || { color: 'black', bgColor: 'white' }
+
     return (
         <div>
-            <h1>{user.fullname}'s Profile</h1>
+            <h1 style={{ color: userP.color, backgroundColor: userP.bgColor }}>{user.fullname}'s Profile</h1>
             {loggedInUser && loggedInUser._id === user._id && (
                 <button onClick={() => setIsEditing(!isEditing)}>
                     {isEditing ? 'Cancel' : 'Edit Profile'}
@@ -79,23 +81,23 @@ export function UserDetails() {
                     </label>
                     <label>
                         Text Color:
-                        {/* <input type="color" name="color" value={user.prefs.color} onChange={handlePrefsChange} /> */}
+                        <input type="color" name="color" value={userP.color} onChange={handlePrefsChange} />
                     </label>
                     <label>
                         Background Color:
-                        {/* <input type="color" name="bgColor" value={user.prefs.bgColor} onChange={handlePrefsChange} /> */}
+                        <input type="color" name="bgColor" value={userP.bgColor} onChange={handlePrefsChange} />
                     </label>
                     <button onClick={saveUser}>Save</button>
                 </div>
             ) : (
                 <div>
                     <h2>Preferences</h2>
-                    {/* <p>Text Color: {user.prefs.color}</p> */}
-                    {/* <p>Background Color: {user.prefs.bgColor}</p> */}
+                    <p>Text Color: {userP.color}</p>
+                    <p>Background Color: {userP.bgColor}</p>
                 </div>
             )}
             <h2>Todos Created by {user.fullname} (Done)</h2>
             <TodoList todos={userTodos} showActions={false} onToggleTodo={() => {}} onRemoveTodo={() => {}} />
         </div>
-    )
+    );
 }
